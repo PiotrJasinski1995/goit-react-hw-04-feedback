@@ -1,27 +1,21 @@
-import { Component } from 'react';
 import PropTypes from 'prop-types';
-import * as Styled from './styled';
+import { FeedbackOptionsListStyled, ButtonStyled } from './styled';
 
-class FeedbackOptions extends Component {
-  static propTypes = {
-    options: PropTypes.arrayOf(PropTypes.string),
-    onLeaveFeedback: PropTypes.func,
-  };
+const FeedbackOptions = ({ options, onLeaveFeedback }) => {
+  return (
+    <FeedbackOptionsListStyled>
+      {options.map(option => (
+        <li key={option}>
+          <ButtonStyled onClick={onLeaveFeedback}>{option}</ButtonStyled>
+        </li>
+      ))}
+    </FeedbackOptionsListStyled>
+  );
+};
 
-  render() {
-    const { options, onLeaveFeedback } = this.props;
-    return (
-      <Styled.FeedbackOptionsListStyled>
-        {options.map(option => (
-          <li key={option}>
-            <Styled.ButtonStyled onClick={onLeaveFeedback}>
-              {option}
-            </Styled.ButtonStyled>
-          </li>
-        ))}
-      </Styled.FeedbackOptionsListStyled>
-    );
-  }
-}
+FeedbackOptions.propTypes = {
+  options: PropTypes.arrayOf(PropTypes.string),
+  onLeaveFeedback: PropTypes.func,
+};
 
 export default FeedbackOptions;
